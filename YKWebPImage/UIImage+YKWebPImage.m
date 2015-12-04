@@ -222,9 +222,10 @@ compatibleWithTraitCollection:(UITraitCollection *)traitCollection {
     pic.height = (int)webPImageHeight;
     pic.colorspace = WEBP_YUV420;
     
-    WebPPictureImportRGBA(&pic, webPImageData, (int)webPBytesPerRow);
+    WebPPictureImportBGRA(&pic, webPImageData, (int)webPBytesPerRow);
     WebPPictureARGBToYUVA(&pic, WEBP_YUV420);
-    WebPCleanupTransparentArea(&pic);
+    // We do not really care about pictures with opacity
+    //WebPCleanupTransparentArea(&pic);
     
     WebPMemoryWriter writer;
     WebPMemoryWriterInit(&writer);
