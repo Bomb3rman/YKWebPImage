@@ -22,4 +22,6 @@
 
 @interface UIImage (YKWebPImage)
 
++ (NSData*)imageToWebP:(UIImage*)image quality:(CGFloat)quality;
+
 @end

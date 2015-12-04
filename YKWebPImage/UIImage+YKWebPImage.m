@@ -21,7 +21,8 @@
 #import "UIImage+YKWebPImage.h"
 #import <objc/runtime.h>
 #import "YKSwizzle.h"
-#import <decode.h>
+#import <WebP/decode.h>
+#import <WebP/encode.h>
 
 static void releaseData(void *info, const void *data, size_t size) {
     if(info) {
@@ -152,5 +153,92 @@ compatibleWithTraitCollection:(UITraitCollection *)traitCollection {
     return [self yk_imageNamed:name inBundle:bundle compatibleWithTraitCollection:traitCollection];
 }
 
+
++ (NSData *)imageToWebP:(UIImage *)image quality:(CGFloat)quality
+{
+    NSParameterAssert(image != nil);
+    NSParameterAssert(quality >= 0.0f && quality <= 100.0f);
+    return [self convertToWebP:image quality:quality alpha:1.0f preset:WEBP_PRESET_DEFAULT configBlock:nil error:nil];
+}
+
++ (NSData *)convertToWebP:(UIImage *)image
+                  quality:(CGFloat)quality
+                    alpha:(CGFloat)alpha
+                   preset:(WebPPreset)preset
+              configBlock:(void (^)(WebPConfig *))configBlock
+                    error:(NSError **)error
+{
+    //    if (alpha < 1) {
+    //        image = [self webPImage:image withAlpha:alpha];
+    //    }
+    
+    CGImageRef webPImageRef = image.CGImage;
+    size_t webPBytesPerRow = CGImageGetBytesPerRow(webPImageRef);
+    
+    size_t webPImageWidth = CGImageGetWidth(webPImageRef);
+    size_t webPImageHeight = CGImageGetHeight(webPImageRef);
+    
+    CGDataProviderRef webPDataProviderRef = CGImageGetDataProvider(webPImageRef);
+    CFDataRef webPImageDatRef = CGDataProviderCopyData(webPDataProviderRef);
+    
+    uint8_t *webPImageData = (uint8_t *)CFDataGetBytePtr(webPImageDatRef);
+    
+    WebPConfig config;
+    if (!WebPConfigPreset(&config, preset, quality)) {
+        NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+        [errorDetail setValue:@"Configuration preset failed to initialize." forKey:NSLocalizedDescriptionKey];
+        if(error != NULL)
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@.errorDomain",  [[NSBundle mainBundle] bundleIdentifier]] code:-101 userInfo:errorDetail];
+        
+        CFRelease(webPImageDatRef);
+        return nil;
+    }
+    
+    if (configBlock) {
+        configBlock(&config);
+    }
+    
+    if (!WebPValidateConfig(&config)) {
+        NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+        [errorDetail setValue:@"One or more configuration parameters are beyond their valid ranges." forKey:NSLocalizedDescriptionKey];
+        if(error != NULL)
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@.errorDomain",  [[NSBundle mainBundle] bundleIdentifier]] code:-101 userInfo:errorDetail];
+        
+        CFRelease(webPImageDatRef);
+        return nil;
+    }
+    
+    WebPPicture pic;
+    if (!WebPPictureInit(&pic)) {
+        NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+        [errorDetail setValue:@"Failed to initialize structure. Version mismatch." forKey:NSLocalizedDescriptionKey];
+        if(error != NULL)
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@.errorDomain",  [[NSBundle mainBundle] bundleIdentifier]] code:-101 userInfo:errorDetail];
+        
+        CFRelease(webPImageDatRef);
+        return nil;
+    }
+    pic.width = (int)webPImageWidth;
+    pic.height = (int)webPImageHeight;
+    pic.colorspace = WEBP_YUV420;
+    
+    WebPPictureImportRGBA(&pic, webPImageData, (int)webPBytesPerRow);
+    WebPPictureARGBToYUVA(&pic, WEBP_YUV420);
+    WebPCleanupTransparentArea(&pic);
+    
+    WebPMemoryWriter writer;
+    WebPMemoryWriterInit(&writer);
+    pic.writer = WebPMemoryWrite;
+    pic.custom_ptr = &writer;
+    WebPEncode(&config, &pic);
+    
+    NSData *webPFinalData = [NSData dataWithBytes:writer.mem length:writer.size];
+    
+    free(writer.mem);
+    WebPPictureFree(&pic);
+    CFRelease(webPImageDatRef);
+    
+    return webPFinalData;
+}
 
 @end

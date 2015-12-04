@@ -5,6 +5,11 @@ Plug-and-play WebP Image support for iOS. Compatibile with many other image fetc
 
 * Works transparently with Swift
 
+Modifications
+-------------
+
+Includes WebP encoding functionality from iOS-WebP from Sean Ooi (https://github.com/seanooi/iOS-WebP).
+
 Installation
 ------------
 
