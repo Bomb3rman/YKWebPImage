@@ -64,6 +64,7 @@ static void releaseData(void *info, const void *data, size_t size) {
     // At the moment, traitCollections are ignored. We will add support for traitCollections... eventually :)
     
     // Nab the width and height from the data stream
+    //NSDate *date = [NSDate date];
     int width, height;
     if (!WebPGetInfo([data bytes], [data length], &width, &height)) {
         return nil;
@@ -75,10 +76,10 @@ static void releaseData(void *info, const void *data, size_t size) {
         return nil;
     }
     
-    config->options.bypass_filtering = 1;
+    config->options.bypass_filtering = 0;
     config->options.no_fancy_upsampling = 1;
     config->options.use_threads = 1;
-    config->output.colorspace = MODE_RGBA;
+    config->output.colorspace = MODE_RGB;
     
     // Read the in-stream options
     if (WebPGetFeatures([data bytes], [data length], &(config->input)) != VP8_STATUS_OK) {
@@ -89,13 +90,14 @@ static void releaseData(void *info, const void *data, size_t size) {
     if (WebPDecode([data bytes], [data length], config) != VP8_STATUS_OK) {
         return nil;
     }
+    //NSLog(@"%f", -[date timeIntervalSinceNow]);
     
     // Convert to a UIImage via [UIImage imageWithCGImage:CGImageCreate()]
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaLast;
-    CGDataProviderRef provider = CGDataProviderCreateWithData(config, config->output.u.RGBA.rgba, width * height * 4, releaseData);
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(config, config->output.u.RGBA.rgba, width * height * 3, releaseData);
     CGColorRenderingIntent intent = kCGRenderingIntentDefault;
-    CGImageRef cgImage = CGImageCreate(width, height, 8, 32, 4 * width, colorSpace, bitmapInfo, provider, NULL, YES, intent);
+    CGImageRef cgImage = CGImageCreate(width, height, 8, 24, 3 * width, colorSpace, bitmapInfo, provider, NULL, YES, intent);
     UIImage *image = [UIImage imageWithCGImage:cgImage scale:scale orientation:UIImageOrientationUp];
     
     CGImageRelease(cgImage);
