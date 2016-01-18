@@ -23,16 +23,17 @@
 #import "YKSwizzle.h"
 #import <WebP/decode.h>
 #import <WebP/encode.h>
+#import <WebP/mux.h>
+#import <WebP/demux.h>
 
-static void releaseData(void *info, const void *data, size_t size) {
-    if(info) {
-        WebPDecoderConfig *config = (WebPDecoderConfig *)info;
-        WebPDecBuffer *output = &(config->output);
-        WebPFreeDecBuffer(output);
+// This gets called when the UIImage gets collected and frees the underlying image.
+static void free_image_data(void *info, const void *data, size_t size)
+{
+    if(info != NULL) {
+        WebPFreeDecBuffer(&(((WebPDecoderConfig *) info)->output));
         free(info);
-    }
-    else {
-        free((void *)data);
+    } else {
+        free((void *) data);
     }
 }
 
@@ -60,51 +61,73 @@ static void releaseData(void *info, const void *data, size_t size) {
 }
 
 #pragma mark Decoder
-+ (UIImage *)webPImageFromData:(NSData *)data scale:(CGFloat)scale {
-    // At the moment, traitCollections are ignored. We will add support for traitCollections... eventually :)
-    
-    // Nab the width and height from the data stream
-    //NSDate *date = [NSDate date];
-    int width, height;
-    if (!WebPGetInfo([data bytes], [data length], &width, &height)) {
++ (UIImage *)webPImageFromData:(NSData *)imgData scale:(CGFloat)scale {
+    // `WebPGetInfo` weill return image width and height
+    int width = 0, height = 0;
+    if(!WebPGetInfo([imgData bytes], [imgData length], &width, &height)) {
+        NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+        [errorDetail setValue:@"Header formatting error." forKey:NSLocalizedDescriptionKey];
         return nil;
     }
     
-    // Create the decoder configuration
-    WebPDecoderConfig *config = malloc(sizeof(WebPDecoderConfig));
-    if (!WebPInitDecoderConfig(config)) {
+    WebPDecoderConfig * config = malloc(sizeof(WebPDecoderConfig));
+    if(!WebPInitDecoderConfig(config)) {
+        NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+        [errorDetail setValue:@"Failed to initialize structure. Version mismatch." forKey:NSLocalizedDescriptionKey];
         return nil;
     }
     
-    config->options.bypass_filtering = 0;
     config->options.no_fancy_upsampling = 1;
+    config->options.bypass_filtering = 1;
     config->options.use_threads = 1;
-    config->output.colorspace = MODE_RGB;
+    config->output.colorspace = MODE_RGBA;
     
-    // Read the in-stream options
-    if (WebPGetFeatures([data bytes], [data length], &(config->input)) != VP8_STATUS_OK) {
+    // Decode the WebP image data into a RGBA value array
+    VP8StatusCode decodeStatus = WebPDecode([imgData bytes], [imgData length], config);
+    if (decodeStatus != VP8_STATUS_OK) {
         return nil;
     }
     
-    // Decode this sucker
-    if (WebPDecode([data bytes], [data length], config) != VP8_STATUS_OK) {
-        return nil;
+    // Construct UIImage from the decoded RGBA value array
+    uint8_t *data = WebPDecodeRGBA([imgData bytes], [imgData length], &width, &height);
+    CGDataProviderRef provider = CGDataProviderCreateWithData(config, data, config->options.scaled_width  * config->options.scaled_height * 4, free_image_data);
+    
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault |kCGImageAlphaLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+    CGImageRef imageRef = CGImageCreate(width, height, 8, 32, 4 * width, colorSpaceRef, bitmapInfo, provider, NULL, YES, renderingIntent);
+    
+    WebPData webPImageData;
+    webPImageData.bytes = imgData.bytes;
+    webPImageData.size = imgData.length;
+    
+    WebPDemuxer *demux = WebPDemux(&webPImageData);
+    WebPIterator iter;
+    if (WebPDemuxGetFrame(demux, 1, &iter)) {
+        do {
+        } while (WebPDemuxNextFrame(&iter));
+        WebPDemuxReleaseIterator(&iter);
     }
-    //NSLog(@"%f", -[date timeIntervalSinceNow]);
+    // ... (Extract metadata).
+    WebPChunkIterator chunk_iter;
+    int64_t imageOrientation = UIImageOrientationUp;
+    // TODO insert real EXIF orientation data
+    if (WebPDemuxGetChunk(demux, "EXIF ", 1, &chunk_iter)) {
+        imageOrientation = *((int64_t*)chunk_iter.chunk.bytes);
+    }
+    // ... (Consume the XMP metadata in 'chunk_iter.chunk').
+    WebPDemuxReleaseChunkIterator(&chunk_iter);
+    WebPDemuxDelete(demux);
     
-    // Convert to a UIImage via [UIImage imageWithCGImage:CGImageCreate()]
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
-    CGDataProviderRef provider = CGDataProviderCreateWithData(config, config->output.u.RGBA.rgba, width * height * 3, releaseData);
-    CGColorRenderingIntent intent = kCGRenderingIntentDefault;
-    CGImageRef cgImage = CGImageCreate(width, height, 8, 24, 3 * width, colorSpace, bitmapInfo, provider, NULL, YES, intent);
-    UIImage *image = [UIImage imageWithCGImage:cgImage scale:scale orientation:UIImageOrientationUp];
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:(UIImageOrientation)imageOrientation];
     
-    CGImageRelease(cgImage);
-    CGColorSpaceRelease(colorSpace);
+    // Free resources to avoid memory leaks
+    CGImageRelease(imageRef);
+    CGColorSpaceRelease(colorSpaceRef);
     CGDataProviderRelease(provider);
     
-    return image;
+    return result;
 }
 
 #pragma mark Init Methods
@@ -196,6 +219,9 @@ compatibleWithTraitCollection:(UITraitCollection *)traitCollection {
         return nil;
     }
     
+    config.method = 6;
+    config.target_size = 15000;
+    
     if (configBlock) {
         configBlock(&config);
     }
@@ -235,7 +261,31 @@ compatibleWithTraitCollection:(UITraitCollection *)traitCollection {
     pic.custom_ptr = &writer;
     WebPEncode(&config, &pic);
     
-    NSData *webPFinalData = [NSData dataWithBytes:writer.mem length:writer.size];
+    WebPData webPData;
+    webPData.bytes = writer.mem;
+    webPData.size = writer.size;
+    
+    int copy_data = 0;
+    WebPMux* mux = WebPMuxNew();
+    // ... (Prepare image data).
+    WebPMuxSetImage(mux, &webPData, copy_data);
+    // ... (Prepare XMP metadata).
+    
+    WebPData orientationData;
+    // TODO insert real EXIF orientation data
+    int64_t orientation = image.imageOrientation;
+    orientationData.bytes = (uint8_t*)&orientation;
+    orientationData.size = sizeof(int64_t);
+    WebPMuxSetChunk(mux, "EXIF", &orientationData, 1);
+    // Get data from mux in WebP RIFF format.
+    
+    WebPData outData;
+    WebPMuxAssemble(mux, &outData);
+    WebPMuxDelete(mux);
+    
+    NSData *webPFinalData = [NSData dataWithBytes:outData.bytes length:outData.size];
+    
+    WebPDataClear(&outData);
     
     free(writer.mem);
     WebPPictureFree(&pic);
