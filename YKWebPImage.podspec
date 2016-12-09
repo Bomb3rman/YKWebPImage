@@ -11,9 +11,8 @@ Pod::Spec.new do |s|
   s.requires_arc          = true
   s.dependency            'libwebp', '~> 0.5.1'
   s.xcconfig = {
-      'USER_HEADER_SEARCH_PATHS' => '$(inherited) $(SRCROOT)/libwebp/src'
-    }
-  s.pod_target_xcconfig   = { 'ENABLE_BITCODE' => 'NO' }
+    'USER_HEADER_SEARCH_PATHS' => '$(inherited) $(SRCROOT)/libwebp/src'
+  }
   s.summary               = "Plug and Play WebP support for iOS"
   s.description  = <<-DESC
 	  # YKWebPImage
