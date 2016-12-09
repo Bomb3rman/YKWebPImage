@@ -9,7 +9,10 @@ Pod::Spec.new do |s|
   s.source                = { :git => "https://github.com/yakatak/YKWebPImage.git", :tag => "v0.0.4" }
   s.source_files          = 'YKWebPImage/**/*.{m,h}'
   s.requires_arc          = true
-  s.vendored_frameworks   = 'WebP.framework'
+  s.dependency            'libwebp', '~> 0.5.1'
+  s.xcconfig = {
+      'USER_HEADER_SEARCH_PATHS' => '$(inherited) $(SRCROOT)/libwebp/src'
+    }
   s.pod_target_xcconfig   = { 'ENABLE_BITCODE' => 'NO' }
   s.summary               = "Plug and Play WebP support for iOS"
   s.description  = <<-DESC

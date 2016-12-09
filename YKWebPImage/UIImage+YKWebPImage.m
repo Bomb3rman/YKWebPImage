@@ -21,10 +21,10 @@
 #import "UIImage+YKWebPImage.h"
 #import <objc/runtime.h>
 #import "YKSwizzle.h"
-#import <WebP/decode.h>
-#import <WebP/encode.h>
-#import <WebP/mux.h>
-#import <WebP/demux.h>
+#import "webp/decode.h"
+#import "webp/encode.h"
+#import "webp/mux.h"
+#import "webp/demux.h"
 
 // This gets called when the UIImage gets collected and frees the underlying image.
 static void free_image_data(void *info, const void *data, size_t size)
