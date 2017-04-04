@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09351AEC6DCDCBDCB0921E89 /* libPods-YKWebPImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1185B08B73037801DE53D65 /* libPods-YKWebPImage.a */; };
+		287AC93000083577C4904DF3 /* libPods-YKWebPImageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB6C7BB6A82A8BD699CA06B /* libPods-YKWebPImageTests.a */; };
 		745774FD1AFF623500416C44 /* TestImages in Resources */ = {isa = PBXBuildFile; fileRef = 745774FC1AFF623500416C44 /* TestImages */; };
 		74C2B2141AF024C200A4D4C2 /* YKWebPImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C2B2081AF024C200A4D4C2 /* YKWebPImage.framework */; };
 		74C2B21B1AF024C200A4D4C2 /* YKWebPImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C2B21A1AF024C200A4D4C2 /* YKWebPImageTests.m */; };
@@ -14,7 +16,7 @@
 		74D62C251AF4CFA500D3F055 /* UIImage+YKWebPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D62C231AF4CFA500D3F055 /* UIImage+YKWebPImage.m */; };
 		74D62C291AF65BE600D3F055 /* YKSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D62C271AF65BE600D3F055 /* YKSwizzle.m */; };
 		74D62C2A1AF65BE600D3F055 /* YKSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 74D62C281AF65BE600D3F055 /* YKSwizzle.h */; };
-		BC99961F59A43F9BC7630F97 /* Pods_YKWebPImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A2BCCD4F2A4D4B794DD955 /* Pods_YKWebPImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F6B1A26A1E92E6A90096B740 /* YKWebPImage.h in Headers */ = {isa = PBXBuildFile; fileRef = F6B1A2691E92E6A90096B740 /* YKWebPImage.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,9 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041FD318D837D66DD1F32F56 /* Pods-YKWebPImageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YKWebPImageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YKWebPImageTests/Pods-YKWebPImageTests.release.xcconfig"; sourceTree = "<group>"; };
 		09D38414B409AD07363A43B2 /* Pods-YKWebPImage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YKWebPImage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YKWebPImage/Pods-YKWebPImage.debug.xcconfig"; sourceTree = "<group>"; };
 		0B123E7AA7D5EA32A412A116 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		57A2BCCD4F2A4D4B794DD955 /* Pods_YKWebPImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YKWebPImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C3BA6F43C49BDD8685A55F7 /* Pods-YKWebPImageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YKWebPImageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YKWebPImageTests/Pods-YKWebPImageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		745774FC1AFF623500416C44 /* TestImages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestImages; path = ../../YKWebPImage/YKWebPImageTests/TestImages; sourceTree = "<group>"; };
 		74C2B2081AF024C200A4D4C2 /* YKWebPImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YKWebPImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74C2B20C1AF024C200A4D4C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -41,7 +44,10 @@
 		74D62C231AF4CFA500D3F055 /* UIImage+YKWebPImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YKWebPImage.m"; sourceTree = "<group>"; };
 		74D62C271AF65BE600D3F055 /* YKSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKSwizzle.m; sourceTree = "<group>"; };
 		74D62C281AF65BE600D3F055 /* YKSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKSwizzle.h; sourceTree = "<group>"; };
+		B1185B08B73037801DE53D65 /* libPods-YKWebPImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YKWebPImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB6C7BB6A82A8BD699CA06B /* libPods-YKWebPImageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YKWebPImageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E2D9241E6B444CB82A08B7 /* Pods-YKWebPImage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YKWebPImage.release.xcconfig"; path = "Pods/Target Support Files/Pods-YKWebPImage/Pods-YKWebPImage.release.xcconfig"; sourceTree = "<group>"; };
+		F6B1A2691E92E6A90096B740 /* YKWebPImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKWebPImage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC99961F59A43F9BC7630F97 /* Pods_YKWebPImage.framework in Frameworks */,
+				09351AEC6DCDCBDCB0921E89 /* libPods-YKWebPImage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74C2B2141AF024C200A4D4C2 /* YKWebPImage.framework in Frameworks */,
+				287AC93000083577C4904DF3 /* libPods-YKWebPImageTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,7 +75,8 @@
 			isa = PBXGroup;
 			children = (
 				0B123E7AA7D5EA32A412A116 /* libPods.a */,
-				57A2BCCD4F2A4D4B794DD955 /* Pods_YKWebPImage.framework */,
+				B1185B08B73037801DE53D65 /* libPods-YKWebPImage.a */,
+				DBB6C7BB6A82A8BD699CA06B /* libPods-YKWebPImageTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -78,6 +86,8 @@
 			children = (
 				09D38414B409AD07363A43B2 /* Pods-YKWebPImage.debug.xcconfig */,
 				F4E2D9241E6B444CB82A08B7 /* Pods-YKWebPImage.release.xcconfig */,
+				3C3BA6F43C49BDD8685A55F7 /* Pods-YKWebPImageTests.debug.xcconfig */,
+				041FD318D837D66DD1F32F56 /* Pods-YKWebPImageTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -110,6 +120,7 @@
 				74D62C231AF4CFA500D3F055 /* UIImage+YKWebPImage.m */,
 				74D62C271AF65BE600D3F055 /* YKSwizzle.m */,
 				74D62C281AF65BE600D3F055 /* YKSwizzle.h */,
+				F6B1A2691E92E6A90096B740 /* YKWebPImage.h */,
 			);
 			path = YKWebPImage;
 			sourceTree = "<group>";
@@ -149,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74D62C241AF4CFA500D3F055 /* UIImage+YKWebPImage.h in Headers */,
+				F6B1A26A1E92E6A90096B740 /* YKWebPImage.h in Headers */,
 				74D62C2A1AF65BE600D3F055 /* YKSwizzle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,12 +172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74C2B2201AF024C200A4D4C2 /* Build configuration list for PBXNativeTarget "YKWebPImage" */;
 			buildPhases = (
-				54DEDABF0BB86316153A4193 /* Check Pods Manifest.lock */,
+				54DEDABF0BB86316153A4193 /* [CP] Check Pods Manifest.lock */,
 				74C2B2031AF024C200A4D4C2 /* Sources */,
 				74C2B2041AF024C200A4D4C2 /* Frameworks */,
 				74C2B2051AF024C200A4D4C2 /* Headers */,
 				74C2B2061AF024C200A4D4C2 /* Resources */,
-				4AC8D933D7C2740C083A17B4 /* Copy Pods Resources */,
+				4AC8D933D7C2740C083A17B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -180,9 +192,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74C2B2211AF024C200A4D4C2 /* Build configuration list for PBXNativeTarget "YKWebPImageTests" */;
 			buildPhases = (
+				B73C59624789E541996DAC02 /* [CP] Check Pods Manifest.lock */,
 				74C2B20F1AF024C200A4D4C2 /* Sources */,
 				74C2B2101AF024C200A4D4C2 /* Frameworks */,
 				74C2B2111AF024C200A4D4C2 /* Resources */,
+				CA646BBC1434D01008D8BF7F /* [CP] Embed Pods Frameworks */,
+				ACC5966E4445DFB2E34E2AD5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,7 +215,7 @@
 		74C2B1FD1AF01EA600A4D4C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0830;
 				TargetAttributes = {
 					74C2B2071AF024C200A4D4C2 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -247,14 +262,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4AC8D933D7C2740C083A17B4 /* Copy Pods Resources */ = {
+		4AC8D933D7C2740C083A17B4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,19 +277,64 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YKWebPImage/Pods-YKWebPImage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		54DEDABF0BB86316153A4193 /* Check Pods Manifest.lock */ = {
+		54DEDABF0BB86316153A4193 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ACC5966E4445DFB2E34E2AD5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YKWebPImageTests/Pods-YKWebPImageTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B73C59624789E541996DAC02 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CA646BBC1434D01008D8BF7F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YKWebPImageTests/Pods-YKWebPImageTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -317,12 +377,26 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_OUTPUT_FORMAT = binary;
 				ONLY_ACTIVE_ARCH = YES;
 				PLIST_FILE_OUTPUT_FORMAT = binary;
@@ -338,12 +412,25 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_OUTPUT_FORMAT = binary;
 				PLIST_FILE_OUTPUT_FORMAT = binary;
 			};
@@ -367,7 +454,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -397,6 +484,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yakatak.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YKWebPImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -424,7 +512,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -447,6 +535,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yakatak.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YKWebPImage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -459,6 +548,7 @@
 		};
 		74C2B21E1AF024C200A4D4C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C3BA6F43C49BDD8685A55F7 /* Pods-YKWebPImageTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -502,6 +592,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yakatak.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YKWebPImageTests;
 				SDKROOT = iphoneos;
 			};
@@ -509,6 +600,7 @@
 		};
 		74C2B21F1AF024C200A4D4C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 041FD318D837D66DD1F32F56 /* Pods-YKWebPImageTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -545,6 +637,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yakatak.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YKWebPImageTests;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
